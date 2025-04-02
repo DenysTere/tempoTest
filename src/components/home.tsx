@@ -265,7 +265,7 @@ const Home = () => {
           <div className="grid grid-cols-2 gap-4">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?w=400&q=80"
+                src="https://storage.googleapis.com/dressxme_content/IMG_6413.JPG"
                 alt="Before"
                 className="rounded-lg shadow-md"
               />
@@ -275,7 +275,7 @@ const Home = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1604004555489-723a93d6ce74?w=400&q=80"
+                src="https://storage.googleapis.com/dressxme_content/3a5b2499-66d6-4b13-b495-7f9e05fc94a4.jpeg"
                 alt="After"
                 className="rounded-lg shadow-md"
               />
