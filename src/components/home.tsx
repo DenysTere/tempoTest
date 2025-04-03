@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import QuizCard from "./QuizCard";
 import ProgressIndicator from "./ProgressIndicator";
@@ -6,6 +6,8 @@ import QuizNavigation from "./QuizNavigation";
 
 const Home = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [selectedPlan, setSelectedPlan] = useState<string>("4-week");
+  const [timer, setTimer] = useState({ minutes: 10, seconds: 0 });
   const [answers, setAnswers] = useState<Record<number, string | null>>({
     0: null,
     1: null,
@@ -32,6 +34,30 @@ const Home = () => {
     22: null,
     23: null,
   });
+
+  // Countdown timer effect
+  useEffect(() => {
+    // Only start the timer when on the paywall step (step 23)
+    if (currentStep !== 23) return;
+
+    const countdown = setInterval(() => {
+      setTimer((prevTimer) => {
+        const newSeconds = prevTimer.seconds - 1;
+        const newMinutes = prevTimer.minutes;
+
+        if (newSeconds >= 0) {
+          return { minutes: newMinutes, seconds: newSeconds };
+        } else if (newMinutes > 0) {
+          return { minutes: newMinutes - 1, seconds: 59 };
+        } else {
+          clearInterval(countdown);
+          return { minutes: 0, seconds: 0 };
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(countdown);
+  }, [currentStep]);
 
   const totalSteps = 24; // 0-23
 
@@ -123,89 +149,6 @@ const Home = () => {
               clothes in stores
             </li>
           </ul>
-          <div className="flex flex-wrap justify-center gap-6 mt-8 bg-pink-50/90 py-6 px-4 rounded-xl shadow-md border border-pink-100">
-            <div className="flex items-center">
-              <svg
-                width="40"
-                height="24"
-                viewBox="0 0 40 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="opacity-80"
-              >
-                <path d="M0 0.5H40V23.5H0V0.5Z" fill="#FDF2F8" />
-                <path
-                  d="M3.5 12C3.5 7.5 7 4 11.5 4C16 4 19.5 7.5 19.5 12C19.5 16.5 16 20 11.5 20C7 20 3.5 16.5 3.5 12ZM11.5 18.5C15.1 18.5 18 15.6 18 12C18 8.4 15.1 5.5 11.5 5.5C7.9 5.5 5 8.4 5 12C5 15.6 7.9 18.5 11.5 18.5Z"
-                  fill="#D4A1C8"
-                />
-                <path d="M20.5 4.5H22V19.5H20.5V4.5Z" fill="#D4A1C8" />
-                <path
-                  d="M24 4.5H32.5C35.5 4.5 37.5 6.5 37.5 9.5C37.5 12.5 35.5 14.5 32.5 14.5H25.5V19.5H24V4.5ZM25.5 13H32.5C34.7 13 36 11.7 36 9.5C36 7.3 34.7 6 32.5 6H25.5V13Z"
-                  fill="#D4A1C8"
-                />
-              </svg>
-              <span className="text-pink-800 text-xs ml-1 font-medium">
-                Vogue
-              </span>
-            </div>
-            <div className="flex items-center">
-              <svg
-                width="40"
-                height="24"
-                viewBox="0 0 40 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="opacity-80"
-              >
-                <path d="M5 5H35V19H5V5Z" fill="#FDF2F8" />
-                <path d="M7 7H33V9H7V7Z" fill="#D4A1C8" />
-                <path d="M7 11H33V12H7V11Z" fill="#D4A1C8" />
-                <path d="M7 14H33V15H7V14Z" fill="#D4A1C8" />
-                <path d="M7 17H20V18H7V17Z" fill="#D4A1C8" />
-              </svg>
-              <span className="text-pink-800 text-xs ml-1 font-medium">
-                NY Times
-              </span>
-            </div>
-            <div className="flex items-center">
-              <svg
-                width="40"
-                height="24"
-                viewBox="0 0 40 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="opacity-80"
-              >
-                <path d="M5 5H35V19H5V5Z" fill="#FDF2F8" />
-                <path d="M10 8.5H14.5V15.5H10V8.5Z" fill="#D4A1C8" />
-                <path d="M16 8.5H20.5V15.5H16V8.5Z" fill="#D4A1C8" />
-                <path d="M22 8.5H26.5V15.5H22V8.5Z" fill="#D4A1C8" />
-                <path d="M28 8.5H30V15.5H28V8.5Z" fill="#D4A1C8" />
-              </svg>
-              <span className="text-pink-800 text-xs ml-1 font-medium">
-                CNN
-              </span>
-            </div>
-            <div className="flex items-center">
-              <svg
-                width="40"
-                height="24"
-                viewBox="0 0 40 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="opacity-80"
-              >
-                <path d="M5 5H35V19H5V5Z" fill="#FDF2F8" />
-                <path d="M8 8H15V9.5H8V8Z" fill="#D4A1C8" />
-                <path d="M8 11H32V12.5H8V11Z" fill="#D4A1C8" />
-                <path d="M8 14H32V15.5H8V14Z" fill="#D4A1C8" />
-                <path d="M25 8H32V9.5H25V8Z" fill="#D4A1C8" />
-              </svg>
-              <span className="text-pink-800 text-xs ml-1 font-medium">
-                Le Figaro
-              </span>
-            </div>
-          </div>
         </div>
       ),
       backgroundImage:
@@ -633,9 +576,186 @@ const Home = () => {
     // Screen 23 - Paywall
     {
       type: "paywall",
-      title: "Choose your style transformation plan",
-      backgroundImage:
-        "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=800&q=80",
+      title: "",
+      content: (
+        <div className="space-y-6 mt-2">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col">
+              <div className="flex items-baseline">
+                <span className="text-3xl font-bold">
+                  {timer.minutes.toString().padStart(2, "0")}
+                </span>
+                <span className="text-sm text-gray-500 mx-1">:</span>
+                <span className="text-3xl font-bold">
+                  {timer.seconds.toString().padStart(2, "0")}
+                </span>
+              </div>
+              <div className="flex text-xs text-gray-500">
+                <span className="mr-4">minutes</span>
+                <span>seconds</span>
+              </div>
+            </div>
+            <a
+              href="#subscription-plans"
+              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-6 py-3 font-medium rounded-lg shadow-md transition-all duration-300"
+            >
+              GET MY PLAN
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 gap-1">
+            <div className="bg-gray-100 p-4">
+              <div className="relative h-48 mb-4">
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80"
+                  alt="Before"
+                  className="w-full h-full object-cover grayscale"
+                />
+                <div className="absolute bottom-4 left-0 right-0 text-center text-white font-medium">
+                  NOW
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="h-20">
+                  <h3 className="font-medium text-lg">Your look</h3>
+                  <p className="text-gray-600">Age-appropriate</p>
+                </div>
+                <div>
+                  <h3 className="font-medium text-lg">Wardrobe satisfaction</h3>
+                  <div className="w-full bg-gray-200 h-2 mt-2">
+                    <div className="bg-gradient-to-r from-pink-400 to-purple-400 h-2 w-1/4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-100 p-4">
+              <div className="relative h-48 mb-4">
+                <img
+                  src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80"
+                  alt="After"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-4 left-0 right-0 text-center text-white font-medium">
+                  WITH DRESSX
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="h-20">
+                  <h3 className="font-medium text-lg">Your look</h3>
+                  <p className="text-gray-600">Stylish, hot and timeless</p>
+                </div>
+                <div>
+                  <h3 className="font-medium text-lg">Wardrobe satisfaction</h3>
+                  <div className="w-full bg-gray-200 h-2 mt-2">
+                    <div className="bg-gradient-to-r from-pink-400 to-purple-400 h-2 w-3/4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center pt-8 pb-4">
+            <h2 className="text-3xl font-serif font-medium">
+              Your Stylist-Curated Outfits
+              <br />
+              Are Just <span className="italic">One Click Away</span>
+            </h2>
+          </div>
+
+          <div id="subscription-plans" className="space-y-4">
+            <div
+              className={`border ${selectedPlan === "4-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300`}
+              onClick={() => setSelectedPlan("4-week")}
+            >
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="font-medium text-xl">4-WEEK PLAN</h3>
+                  <p className="text-gray-500">$44.99</p>
+                </div>
+                <div
+                  className={`w-6 h-6 rounded-full border-2 ${selectedPlan === "4-week" ? "border-pink-500" : "border-gray-300"} flex items-center justify-center`}
+                >
+                  {selectedPlan === "4-week" && (
+                    <div className="w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={`border ${selectedPlan === "12-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300`}
+              onClick={() => setSelectedPlan("12-week")}
+            >
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="font-medium text-xl">12-WEEK PLAN</h3>
+                  <p className="text-gray-500">$79.99</p>
+                </div>
+                <div
+                  className={`w-6 h-6 rounded-full border-2 ${selectedPlan === "12-week" ? "border-pink-500" : "border-gray-300"} flex items-center justify-center`}
+                >
+                  {selectedPlan === "12-week" && (
+                    <div className="w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={`border ${selectedPlan === "52-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300`}
+              onClick={() => setSelectedPlan("52-week")}
+            >
+              <div className="absolute -top-3 right-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs px-3 py-1 rounded">
+                BEST OFFER
+              </div>
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="font-medium text-xl">52-WEEK PLAN</h3>
+                  <p className="text-gray-500">$199.99</p>
+                </div>
+                <div
+                  className={`w-6 h-6 rounded-full border-2 ${selectedPlan === "52-week" ? "border-pink-500" : "border-gray-300"} flex items-center justify-center`}
+                >
+                  {selectedPlan === "52-week" && (
+                    <div className="w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center text-sm text-gray-500 py-4">
+            30-DAY MONEY-BACK GUARANTEE
+          </div>
+
+          <a
+            href="#subscription-plans"
+            className="block w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white py-4 font-medium text-center rounded-lg shadow-md transition-all duration-300"
+          >
+            GET MY PLAN
+          </a>
+
+          <div className="text-xs text-gray-500 space-y-2 pt-2">
+            <p>
+              By continuing you agree to be billed{" "}
+              <strong>USD 44.99 for the first 28 days</strong>. If you don't
+              cancel at least 24 hours prior to <strong>1 May 2025</strong>, you
+              will automatically be charged{" "}
+              <strong>the full price of USD 44.99 on a 4-week basis</strong>{" "}
+              until you cancel in your account settings.
+            </p>
+            <p>
+              Learn more about cancellation and refund policy in{" "}
+              <span className="text-gray-400">Subscription Terms</span>,{" "}
+              <span className="text-gray-400">Money-back Policy</span>,{" "}
+              <span className="text-gray-400">Terms & Conditions</span>. The
+              charge will appear on your bill as lumi.beautybox.fyi
+            </p>
+          </div>
+        </div>
+      ),
+      backgroundImage: "",
     },
   ];
 
@@ -653,7 +773,13 @@ const Home = () => {
           </p>
         </header>
 
-        <ProgressIndicator currentStep={currentStep} totalSteps={totalSteps} />
+        <div>
+          <ProgressIndicator
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+            hideStepText={true}
+          />
+        </div>
 
         <motion.div
           key={currentStep}

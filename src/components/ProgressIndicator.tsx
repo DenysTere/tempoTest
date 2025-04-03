@@ -6,6 +6,7 @@ interface ProgressIndicatorProps {
   totalSteps: number;
   labels?: string[];
   showLabels?: boolean;
+  hideStepText?: boolean;
 }
 
 const ProgressIndicator = ({
@@ -13,6 +14,7 @@ const ProgressIndicator = ({
   totalSteps = 10,
   labels = [],
   showLabels = false,
+  hideStepText = false,
 }: ProgressIndicatorProps) => {
   const progress = (currentStep / (totalSteps - 1)) * 100;
 
@@ -58,10 +60,16 @@ const ProgressIndicator = ({
 
       {/* Text indicator */}
       <div className="flex justify-between mt-2 text-xs text-gray-500 font-light">
-        <span className="font-medium text-pink-700">
-          Step {currentStep + 1} of {totalSteps}
+        {!hideStepText && (
+          <span className="font-medium text-pink-700">
+            Step {currentStep + 1} of {totalSteps}
+          </span>
+        )}
+        <span
+          className={`text-gray-400 ${hideStepText ? "w-full text-right" : ""}`}
+        >
+          {Math.round(progress)}% complete
         </span>
-        <span className="text-gray-400">{Math.round(progress)}% complete</span>
       </div>
     </div>
   );
