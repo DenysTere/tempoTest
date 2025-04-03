@@ -596,16 +596,14 @@ const Home = () => {
               </div>
             </div>
             <a
-              href={
-                selectedPlan === "1-week"
-                  ? "https://buy.stripe.com/4gwcPR9qNaqq9wcfZ6"
-                  : selectedPlan === "4-week"
-                    ? "https://buy.stripe.com/aEUdTVdH32XYbEk006"
-                    : "https://buy.stripe.com/eVaeXZ1Ylaqq23KcMR"
-              }
+              href="#subscription-plans"
               className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-6 py-3 font-medium rounded-lg shadow-md transition-all duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("subscription-plans")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
             >
               GET MY PLAN
             </a>
