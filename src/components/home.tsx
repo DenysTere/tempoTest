@@ -596,8 +596,16 @@ const Home = () => {
               </div>
             </div>
             <a
-              href="#subscription-plans"
+              href={
+                selectedPlan === "1-week"
+                  ? "https://buy.stripe.com/4gwcPR9qNaqq9wcfZ6"
+                  : selectedPlan === "4-week"
+                    ? "https://buy.stripe.com/aEUdTVdH32XYbEk006"
+                    : "https://buy.stripe.com/eVaeXZ1Ylaqq23KcMR"
+              }
               className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-6 py-3 font-medium rounded-lg shadow-md transition-all duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               GET MY PLAN
             </a>
@@ -787,29 +795,19 @@ const Home = () => {
           </div>
 
           <a
-            href="#subscription-plans"
+            href={
+              selectedPlan === "1-week"
+                ? "https://buy.stripe.com/4gwcPR9qNaqq9wcfZ6"
+                : selectedPlan === "4-week"
+                  ? "https://buy.stripe.com/aEUdTVdH32XYbEk006"
+                  : "https://buy.stripe.com/eVaeXZ1Ylaqq23KcMR"
+            }
             className="block w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white py-4 font-medium text-center rounded-lg shadow-md transition-all duration-300"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             GET MY PLAN
           </a>
-
-          <div className="text-xs text-gray-500 space-y-2 pt-2">
-            <p>
-              By continuing you agree to be billed{" "}
-              <strong>USD 44.99 for the first 28 days</strong>. If you don't
-              cancel at least 24 hours prior to <strong>1 May 2025</strong>, you
-              will automatically be charged{" "}
-              <strong>the full price of USD 44.99 on a 4-week basis</strong>{" "}
-              until you cancel in your account settings.
-            </p>
-            <p>
-              Learn more about cancellation and refund policy in{" "}
-              <span className="text-gray-400">Subscription Terms</span>,{" "}
-              <span className="text-gray-400">Money-back Policy</span>,{" "}
-              <span className="text-gray-400">Terms & Conditions</span>. The
-              charge will appear on your bill as lumi.beautybox.fyi
-            </p>
-          </div>
         </div>
       ),
       backgroundImage: "",
