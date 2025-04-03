@@ -6,7 +6,7 @@ import QuizNavigation from "./QuizNavigation";
 
 const Home = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [selectedPlan, setSelectedPlan] = useState<string>("4-week");
+  const [selectedPlan, setSelectedPlan] = useState<string>("1-week");
   const [timer, setTimer] = useState({ minutes: 10, seconds: 0 });
   const [answers, setAnswers] = useState<Record<number, string | null>>({
     0: null,
@@ -665,61 +665,118 @@ const Home = () => {
 
           <div id="subscription-plans" className="space-y-4">
             <div
-              className={`border ${selectedPlan === "4-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300`}
-              onClick={() => setSelectedPlan("4-week")}
+              className={`border ${selectedPlan === "1-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300 rounded-xl`}
+              onClick={() => setSelectedPlan("1-week")}
             >
               <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="font-medium text-xl">4-WEEK PLAN</h3>
-                  <p className="text-gray-500">$44.99</p>
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-6 h-6 rounded-full ${selectedPlan === "1-week" ? "bg-gradient-to-r from-pink-500 to-purple-500" : "border-2 border-gray-300"} flex items-center justify-center`}
+                  >
+                    {selectedPlan === "1-week" && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-white"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-xl">1-Week Plan</h3>
+                    <p className="text-gray-500">$ 5.99</p>
+                  </div>
                 </div>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 ${selectedPlan === "4-week" ? "border-pink-500" : "border-gray-300"} flex items-center justify-center`}
-                >
-                  {selectedPlan === "4-week" && (
-                    <div className="w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
-                  )}
+                <div className="text-right">
+                  <p className="font-medium text-xl">$ 0.85</p>
+                  <p className="text-gray-500 text-sm">per day</p>
                 </div>
               </div>
             </div>
 
             <div
-              className={`border ${selectedPlan === "12-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300`}
+              className={`border ${selectedPlan === "4-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300 rounded-xl`}
+              onClick={() => setSelectedPlan("4-week")}
+            >
+              <div className="absolute inset-x-0 -top-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-center py-1 font-medium rounded-sm rounded-[10]">
+                MOST POPULAR
+              </div>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-6 h-6 rounded-full ${selectedPlan === "4-week" ? "bg-gradient-to-r from-pink-500 to-purple-500" : "border-2 border-gray-300"} flex items-center justify-center`}
+                  >
+                    {selectedPlan === "4-week" && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-white"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-xl">4-Week Plan</h3>
+                    <p className="text-gray-500">$ 19.99</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-medium text-xl">$ 0.71</p>
+                  <p className="text-gray-500 text-sm">per day</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={`border ${selectedPlan === "12-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300 rounded-xl`}
               onClick={() => setSelectedPlan("12-week")}
             >
               <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="font-medium text-xl">12-WEEK PLAN</h3>
-                  <p className="text-gray-500">$79.99</p>
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-6 h-6 rounded-full ${selectedPlan === "12-week" ? "bg-gradient-to-r from-pink-500 to-purple-500" : "border-2 border-gray-300"} flex items-center justify-center`}
+                  >
+                    {selectedPlan === "12-week" && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-white"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-xl">12-Week Plan</h3>
+                    <p className="text-gray-500">$ 49.99</p>
+                  </div>
                 </div>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 ${selectedPlan === "12-week" ? "border-pink-500" : "border-gray-300"} flex items-center justify-center`}
-                >
-                  {selectedPlan === "12-week" && (
-                    <div className="w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`border ${selectedPlan === "52-week" ? "border-pink-400" : "border-gray-300"} p-6 relative cursor-pointer hover:border-pink-300 transition-colors duration-300`}
-              onClick={() => setSelectedPlan("52-week")}
-            >
-              <div className="absolute -top-3 right-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs px-3 py-1 rounded">
-                BEST OFFER
-              </div>
-              <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="font-medium text-xl">52-WEEK PLAN</h3>
-                  <p className="text-gray-500">$199.99</p>
-                </div>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 ${selectedPlan === "52-week" ? "border-pink-500" : "border-gray-300"} flex items-center justify-center`}
-                >
-                  {selectedPlan === "52-week" && (
-                    <div className="w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
-                  )}
+                <div className="text-right">
+                  <p className="font-medium text-xl">$ 0.59</p>
+                  <p className="text-gray-500 text-sm">per day</p>
                 </div>
               </div>
             </div>
