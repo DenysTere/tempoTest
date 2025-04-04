@@ -109,7 +109,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
         <CardHeader
           className={`${backgroundImage ? "-mt-16 relative z-10" : ""} pb-2`}
         >
-          <CardTitle className="text-2xl md:text-3xl font-serif text-center text-pink-900 leading-tight">
+          <CardTitle className="text-2xl md:text-3xl font-serif text-center text-black-800 leading-tight">
             {title}
           </CardTitle>
           {subtitle && (

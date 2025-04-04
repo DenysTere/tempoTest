@@ -128,8 +128,8 @@ const Home = () => {
       type: "break",
       title: "",
       content: (
-        <div className="text-center">
-          <h3 className="text-xl font-medium mb-4 text-pink-900">
+        <div className="text-center relative z-10">
+          <h3 className="text-3xl font-serif font-semibold text-black-800 mb-4">
             DRESSX is a perfect place if you want to:
           </h3>
           <ul className="text-left space-y-3 mb-6 mx-auto max-w-xs text-gray-700">
@@ -546,7 +546,7 @@ const Home = () => {
             unique preferences.
           </p>
           <div className="bg-pink-50 p-4 rounded-lg mb-6">
-            <h4 className="font-medium text-pink-800 mb-2">
+            <h4 className="font-medium text-black-800 mb-2">
               Your full profile includes:
             </h4>
             <ul className="text-left space-y-2 text-sm text-gray-700">
@@ -815,32 +815,36 @@ const Home = () => {
   const currentContent = quizContent[currentStep];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md mx-auto">
-        <header className="text-center mb-6">
-          <h1 className="text-3xl font-serif font-semibold text-pink-800">
-            DRESSX
-          </h1>
-          <p className="text-sm text-gray-600 italic">
-            Your Personal Style Guide
-          </p>
-        </header>
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex flex-col items-center p-4 pt-32">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-br from-pink-50 via-white to-purple-50 pt-4 pb-2 px-4">
+        <div className="w-full max-w-md mx-auto">
+          <header className="text-center">
+            <h1 className="text-3xl font-serif font-semibold text-black-800">
+              DRESSX
+            </h1>
+            <p className="text-sm text-gray-600 italic">
+              Your Personal Style Guide
+            </p>
+          </header>
 
-        <div>
-          <ProgressIndicator
-            currentStep={currentStep}
-            totalSteps={totalSteps}
-            hideStepText={true}
-          />
+          <div className="mt-4">
+            <ProgressIndicator
+              currentStep={currentStep}
+              totalSteps={totalSteps}
+              hideStepText={true}
+            />
+          </div>
         </div>
+      </div>
 
+      <div className="w-full max-w-md mx-auto">
         <motion.div
           key={currentStep}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
-          className="w-full mt-4"
+          className="w-full"
         >
           <QuizCard
             type={currentContent.type}
