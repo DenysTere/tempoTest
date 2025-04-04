@@ -85,6 +85,9 @@
   .font-serif {
     font-family: "Playfair Display", serif;
   }
+  h3 {
+    margin-top: 1.3rem;
+  }
 }
 
 /* Custom styles for the quiz */

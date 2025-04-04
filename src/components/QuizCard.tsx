@@ -197,7 +197,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
                   <div className="flex items-center gap-3">
                     {option.image && optionType === "image" && (
                       <div
-                        className="w-12 h-12 rounded-full bg-cover bg-center border border-gray-100"
+                        className="w-12 h-12 rounded-full bg-cover bg-center"
                         style={{ backgroundImage: `url(${option.image})` }}
                       />
                     )}
